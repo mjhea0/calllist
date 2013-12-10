@@ -19,7 +19,13 @@ $ python manage.py runserver
 ```
 open browser to [http://localhost:8000](http://localhost:8000)
 
-### add .gitgnore and requirements.txt files
+### add .gitgnore
+
+### requirements.txt file
+
+```sh
+pip freeze > requirements.txt
+```
 
 ### add to git
 
