@@ -1,14 +1,8 @@
 from django.db import models
-
-class User(models.Model):
-    user_id = models.AutoField(primary_key=True)
-    first_name = models.CharField(max_length=50)
-    last_name = models.CharField(max_length=50)
-    email = models.EmailField(max_length=75)
+from django.contrib.auth.models import User
 
 class Contact(models.Model):
-    contact_id = models.AutoField(primary_key=True)
-    user = models.ForeignKey('User')
+    user = models.ForeignKey(User)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     company = models.CharField(max_length=50, blank=True)
@@ -17,13 +11,15 @@ class Contact(models.Model):
     mobile = models.CharField(max_length=50, blank=True)
     email = models.EmailField(max_length=75, blank=True)
     url = models.URLField(max_length=200, blank=True)
-    next_call = models.DateField()
+    next_call = models.DateField(blank=True)
     note = models.TextField(blank=True)
     created_at = models.DateField(auto_now_add=True)
     update_at = models.DateField(auto_now=True)
 
+    def __unicode__(self):
+        return self.last_name 
+
 # class History(models.Model):
-#     history_id = models.AutoField(primary_key=True)
 #     contact = models.ForeignKey('Contact')
 #     user = models.ForeignKey('User')
 #     email_in = models.BooleanField(default=False)
