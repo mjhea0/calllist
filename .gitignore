@@ -4,11 +4,11 @@ bin
 lib
 include
 .DS_Store
-.pyc
-.sublime-project
-.sublime-workspace
-calllist.sublime-project
-calllist.sublime-workspace
+*.py[cod]
+*.sublime-project
+*.sublime-workspace
+*.sqlite3
+calllist.md
 
 
 # Byte-compiled / optimized / DLL files
