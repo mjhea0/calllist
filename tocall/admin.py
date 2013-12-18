@@ -1,3 +1,7 @@
 from django.contrib import admin
+from tocall.models import Contact
 
-# Register your models here.
+admin.site.register(Contact)
+
+# class ContactAdmin(admin.ModelAdmin):
+# 	list_display = ('__unicode__', '')

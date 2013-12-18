@@ -13,8 +13,9 @@ class Contact(models.Model):
     url = models.URLField(max_length=200, blank=True)
     next_call = models.DateField(blank=True)
     note = models.TextField(blank=True)
-    created_at = models.DateField(auto_now_add=True)
-    update_at = models.DateField(auto_now=True)
+    introduced_by = models.CharField(max_length=50, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    update_at = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
         return self.last_name 
