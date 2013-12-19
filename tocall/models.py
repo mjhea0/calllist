@@ -15,7 +15,7 @@ class Contact(models.Model):
     note = models.TextField(blank=True)
     introduced_by = models.CharField(max_length=50, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
-    update_at = models.DateTimeField(auto_now=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
     def __unicode__(self):
         return self.last_name 
