@@ -1,5 +1,17 @@
 from django.contrib import admin
-from tocall.models import Contact
+from tocall.models import Contact, History
+
+# class HistoryInline(admin.StackedInline):
+# 	fieldsets = [
+# 		(None, {'fields': ['contact', 'write_up', 'cntacted_at']}),
+# 		('Details', {
+# 			'classes': ['collapse',],
+# 			'fields': ['email_in', 'email_out', 'email_linkedin',
+# 			'call_in', 'call_out', 'voice_mail', 'message', 'no_message',
+# 			'no_answer', 'meeting']
+# 			})
+
+# 	]
 
 class ContactAdmin(admin.ModelAdmin):
 	fieldsets = [
@@ -21,7 +33,9 @@ class ContactAdmin(admin.ModelAdmin):
 		})
 	]
 	readonly_fields = ('created_at', 'updated_at')
+	# inlines = [HistoryInline]
 
 	# list_display = ('__unicode__', '')
 
 admin.site.register(Contact, ContactAdmin)
+

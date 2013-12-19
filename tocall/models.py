@@ -20,18 +20,21 @@ class Contact(models.Model):
     def __unicode__(self):
         return self.last_name 
 
-# class History(models.Model):
-#     contact = models.ForeignKey('Contact')
-#     user = models.ForeignKey('User')
-#     email_in = models.BooleanField(default=False)
-#     email_out = models.BooleanField(default=False)
-#     email_linkedin = models.BooleanField(default=False)
-#     call_in = models.BooleanField(default=False)
-#     call_out = models.BooleanField(default=False)
-#     voice_mail = models.BooleanField(default=False)
-#     message = models.BooleanField(default=False)
-#     no_message = models.BooleanField(default=False)
-#     no_answer = models.BooleanField(default=False)
-#     meeting = models.BooleanField(default=False)
-#     write_up = models.TextField(blank=True)
-#     contacted_at = models.DateField(auto_now_add=True)
+class History(models.Model):
+    contact = models.ForeignKey('Contact')
+    email_in = models.BooleanField(default=False)
+    email_out = models.BooleanField(default=False)
+    email_linkedin = models.BooleanField(default=False)
+    call_in = models.BooleanField(default=False)
+    call_out = models.BooleanField(default=False)
+    voice_mail = models.BooleanField(default=False)
+    message = models.BooleanField(default=False)
+    no_message = models.BooleanField(default=False)
+    no_answer = models.BooleanField(default=False)
+    meeting = models.BooleanField(default=False)
+    write_up = models.TextField(blank=True)
+    contacted_at = models.DateField(auto_now_add=True)
+
+    def __unicode__(self):
+        return self.write_up
+        
