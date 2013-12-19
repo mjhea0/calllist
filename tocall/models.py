@@ -33,8 +33,8 @@ class History(models.Model):
     no_answer = models.BooleanField(default=False)
     meeting = models.BooleanField(default=False)
     write_up = models.TextField(blank=True)
-    contacted_at = models.DateField(auto_now_add=True)
-
+    contacted_at = models.DateTimeField(auto_now_add=True)
+    # variable contacted_at is not getting a value at creation, staying null
     def __unicode__(self):
         return self.write_up
-        
+
