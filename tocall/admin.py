@@ -12,8 +12,8 @@ class HistoryAdmin(admin.ModelAdmin):
 			})
 	]
 	readonly_fields = ('contacted_at',)
-
 	list_display = ('contact', 'write_up')
+	search_fields = ['write_up']
 
 class ContactAdmin(admin.ModelAdmin):
 	fieldsets = [
