@@ -13,6 +13,8 @@ class HistoryAdmin(admin.ModelAdmin):
 	]
 	readonly_fields = ('contacted_at',)
 
+	list_display = ('contact', 'write_up')
+
 class ContactAdmin(admin.ModelAdmin):
 	fieldsets = [
 		(None, {'fields': ['first_name', 'last_name']}),
@@ -33,9 +35,8 @@ class ContactAdmin(admin.ModelAdmin):
 		})
 	]
 	readonly_fields = ('created_at', 'updated_at')
-	# inlines = [HistoryInline]
 
-	# list_display = ('__unicode__', '')
+	list_display = ('first_name', 'last_name', 'next_call')
 
 admin.site.register(Contact, ContactAdmin)
 admin.site.register(History, HistoryAdmin)
