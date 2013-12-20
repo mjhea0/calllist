@@ -12,7 +12,7 @@ class HistoryAdmin(admin.ModelAdmin):
 			})
 	]
 	readonly_fields = ('contacted_at',)
-	list_display = ('contact', 'write_up')
+	list_display = ('id', 'contact', 'write_up', 'contacted_at')
 	search_fields = ['write_up']
 
 class ContactAdmin(admin.ModelAdmin):
@@ -36,7 +36,7 @@ class ContactAdmin(admin.ModelAdmin):
 	]
 	readonly_fields = ('created_at', 'updated_at')
 
-	list_display = ('first_name', 'last_name', 'next_call')
+	list_display = ('id', 'first_name', 'last_name', 'next_call')
 
 admin.site.register(Contact, ContactAdmin)
 admin.site.register(History, HistoryAdmin)
