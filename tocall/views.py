@@ -3,6 +3,9 @@ from django.http import HttpResponse
 
 
 def index(request):
+	return HttpResponse("this is the front page demo.")
+
+def list(request):
 	return HttpResponse("this page lists the contacts by date of next contact.")
 
 def detail(request, id):
