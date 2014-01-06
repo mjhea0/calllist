@@ -1,15 +1,49 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Masterpiece network</title>
+    <title>Masterpiece Network</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" media="screen">
   </head>
+
   <body>
+  <!-- The navbar -->
+  <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <a href="{% url 'tocall:list' %}" class="brand">Masterpiece Network</a>
+        
+        <a data-toggle="collapse" data-target=".nav-collapse" class="btn btn-navbar">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </a>
+        
+        <div class="collapse nav-collapse">
+          <form action="" class="navbar-search pull-right">
+            <i class="icon-search icon-white"></i>
+            <input type="text" class="search-query" placeholder=" Name lookup..." />
+          </form>
+        
+          <ul class="nav pull-right">
+            <li class="active"><a href="{% url 'tocall:list' %}">List to call</a></li>
+            <li><a href="{% url 'tocall:report' %}">Report</a></li>
+            <!-- <li><a href="calendar.html">Calendar</a></li> -->
+            <!-- <li><a href="resources.html">Resources</a></li> -->
+            <!-- <li><a href="about.html">About Us</a></li> -->
+            <li><a href="" data-toggle="modal" data-target="#modal-contact-form">Contact us</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div> <!-- end navbar -->
+  <section>
+Hey look at this!
     <div class="container">
       {% block content %}
       {% endblock %}
     </div>
+  </section>  
     <script src="http://code.jquery.com/jquery-1.10.2.min.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
   </body>

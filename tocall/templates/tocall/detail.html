@@ -3,8 +3,8 @@
 
 {% if contact %}
    	<h1>{{ contact.first_name }} {{ contact.last_name }}</h1>
-   	mobile: {{ contact.mobile }}
-	<a href="mailto:{{ contact.email }}">{{ contact.email }}</a>
+   	mobile: {{ contact.mobile }} <br/>
+	<a href="mailto:{{ contact.email }}">{{ contact.email }}</a> <br/>
    	id: {{ contact.id }}
 
 {% else %}
