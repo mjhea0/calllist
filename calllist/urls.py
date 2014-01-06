@@ -11,7 +11,7 @@ urlpatterns = patterns('',
 	# url(r'^address_book/$', views.address_book, name='address_book'),
 	# url(r'^report/$', views.report, name='report'),
 
-    url(r'^tocall/', include('tocall.urls')),
+    url(r'^tocall/', include('tocall.urls', namespace="tocall")),
     url(r'^admin/', include(admin.site.urls)),
 
     # url(r'^$', 'calllist.views.home', name='home'),

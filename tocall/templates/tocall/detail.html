@@ -1,8 +1,14 @@
-{% if one_contact %}
-   	{{ contact.first_name }} {{ contact.last_name }}
+{% extends "base.html" %}
+{% block content %}
+
+{% if contact %}
+   	<h1>{{ contact.first_name }} {{ contact.last_name }}</h1>
    	mobile: {{ contact.mobile }}
-   	email: {{ contact.email }}
+	<a href="mailto:{{ contact.email }}">{{ contact.email }}</a>
+   	id: {{ contact.id }}
 
 {% else %}
-    <p>Egad. Nothing here. one_contact is empty.</p>
+    <p>Egad. Nothing here. contact is empty.</p>
 {% endif %}
+
+{% endblock %}

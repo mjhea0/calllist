@@ -1,5 +1,6 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponse, HttpResponseRedirect
+from django.core.urlresolvers import reverse
 
 from tocall.models import Contact, History
 
@@ -12,12 +13,19 @@ def list(request):
 	return render(request, 'tocall/list.html', context)
 
 def detail(request, id):
-	one_contact = Contact.objects.filter(id=id)
-	context = {'one_contact': one_contact}
+	contact = get_object_or_404(Contact, id=id)
+	context = {'contact': contact}
 	return render(request, 'tocall/detail.html', context)
 
 def address_book(request):
-	return HttpResponse("This is the address_book page.")
+	# addressbook = get_list_or_404(Contact)
+	# addressbook.order_by('last_name')
+	addressbook = Contact.objects.order_by('last_name')
+	context = {'addressbook': addressbook}
+	return render(request, 'tocall/addressbook.html', context)
 
 def report(request):
 	return HttpResponse("Here will be some sort of reporting analytics.")
+
+def effort(request):
+	return HttpResponse("Effort page.")
