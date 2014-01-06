@@ -1,0 +1,8 @@
+{% if one_contact %}
+   	{{ contact.first_name }} {{ contact.last_name }}
+   	mobile: {{ contact.mobile }}
+   	email: {{ contact.email }}
+
+{% else %}
+    <p>Egad. Nothing here. one_contact is empty.</p>
+{% endif %}

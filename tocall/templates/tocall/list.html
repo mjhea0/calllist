@@ -1,0 +1,9 @@
+{% if current_list %}
+    <ul>
+   	{% for contact in current_list %}
+   		<li><a href="/tocall/{{ contact.id }}/">{{ contact.first_name }} {{ contact.last_name }}</a></li>
+   	{% endfor %}
+    </ul>
+{% else %}
+    <p>Nothing here. current_list is empty. Egad.</p>
+{% endif %}
