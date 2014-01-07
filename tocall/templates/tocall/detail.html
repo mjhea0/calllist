@@ -5,27 +5,34 @@
    	<h1>{{ contact.first_name }} {{ contact.last_name }}</h1>
    	<div class="row">
    		<div class="col-md-6">
-		   	<ul class="list-unstyled">
-		   		<li>next contact: {{ contact.next_call }}</li>
-		   		<li>email: <a href="mailto:{{ contact.email }}">{{ contact.email }}</a></li>
-		   		<li>url: <a href="{{ contact.url }}">{{ contact.url }}</a></li>
-		   		<li>mobile: {{ contact.mobile }}</li>
-		   		<li>office: {{ contact.office }}</li>
-		   		<li>created at: {{ contact.created_at }}</li>
-		   		<li>updated at: {{ contact.updated_at }}</li>
-		   	</ul>
+		   	<dl class="dl-horizontal">
+		   		<dt>next contact:</dt><dd> {{ contact.next_call }}</dd>
+		   		<dt>email:</dt><dd> <a href="mailto:{{ contact.email }}">{{ contact.email }}</a></dd>
+		   		<dt>url:</dt><dd> <a href="{{ contact.url }}">{{ contact.url }}</a></dd>
+		   		<dt>mobile:</dt><dd> {{ contact.mobile }}</dd>
+		   		<dt>office:</dt><dd> {{ contact.office }}</dd>
+		   		<dt>created at:</dt><dd> {{ contact.created_at }}</dd>
+		   		<dt>updated at:</dt><dd> {{ contact.updated_at }}</dd>
+		   	</dl>
 		</div>
    		<div class="col-md-6">
-		   	<ul class="list-unstyled">
-		   		<li>company: {{ contact.company }}</a></li>
-		   		<li>role: {{ contact.role }}</a></li>
-		   		<li>introduced by: {{ contact.introdued_by }}</li>
-		   		<li>note: {{ contact.note }}</li>
-		   		<li>id: {{ contact.id }}</li>
-		   	</ul>
+		   	<dl class="dl-horizontal">
+		   		<dt>company:</dt><dd> {{ contact.company }}</a></dd>
+		   		<dt>role:</dt><dd> {{ contact.role }}</a></dd>
+		   		<dt>introduced by:</dt><dd> {{ contact.introdued_by }}</dd>
+		   		<dt>note:</dt><dd> {{ contact.note }}</dd>
+		   		<dt>id:</dt><dd> {{ contact.id }}</dd>
+		   	</dl>
 		</div>
    	</div>
-    <p><a class="btn btn-primary btn-lg" role="button">Edit</a></p>
+   	<div class="row">
+   		<div class="col-md-4">
+    		<a class="btn btn-primary btn-lg" role="button">Post</a>
+    	</div>
+   		<div class="col-md-4 col-md-offset-4">
+		    <a class="btn btn-danger btn-sm" role="button">Edit contact</a>
+		</div>
+	</div>
 
 {% else %}
     <p>Egad. Nothing here. contact is empty.</p>
