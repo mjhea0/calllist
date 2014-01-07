@@ -2,9 +2,9 @@
 {% block content %}
 
 {% if current_list %}
-    <ul>
+    <ul class="list-unstyled">
    	{% for contact in current_list %}
-   		<li><a href="{% url 'tocall:detail' contact.id %}">{{ contact.first_name }} {{ contact.last_name }}</a></li>
+   		<li>{{contact.next_call }}: <a href="{% url 'tocall:detail' contact.id %}">{{ contact.first_name }} {{ contact.last_name }}</a></li>
    	{% endfor %}
     </ul>
 {% else %}

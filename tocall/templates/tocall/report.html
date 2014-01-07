@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% if report %}
+	{{ report }}
+{% else %}
+    <p>Nothing here. report is empty. Egad.</p>
+{% endif %}
+
+{% endblock %}

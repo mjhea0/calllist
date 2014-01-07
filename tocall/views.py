@@ -25,7 +25,9 @@ def address_book(request):
 	return render(request, 'tocall/addressbook.html', context)
 
 def report(request):
-	return HttpResponse("Here will be some sort of reporting analytics.")
+	report = "Here will be some sort of reporting analytics."
+	context = {'report': report}
+	return render(request, 'tocall/report.html', context)
 
 def effort(request):
 	return HttpResponse("Effort page.")

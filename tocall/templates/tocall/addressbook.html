@@ -2,9 +2,10 @@
 {% block content %}
 
 {% if addressbook %}
-    <ul>
+    <ul class="list-unstyled">
    	{% for contact in addressbook %}
-   		<li>{{ contact.id }} <a href="{% url 'tocall:detail' contact.id %}">{{ contact.first_name }} {{ contact.last_name }}</a></li>
+   		<li><a href="{% url 'tocall:detail' contact.id %}">{{ contact.first_name }} {{ contact.last_name }} 
+   			{{ contact.role }} {{ contact.company }}</a></li>
    	{% endfor %}
     </ul>
 {% else %}

@@ -3,9 +3,29 @@
 
 {% if contact %}
    	<h1>{{ contact.first_name }} {{ contact.last_name }}</h1>
-   	mobile: {{ contact.mobile }} <br/>
-	<a href="mailto:{{ contact.email }}">{{ contact.email }}</a> <br/>
-   	id: {{ contact.id }}
+   	<div class="row">
+   		<div class="col-md-6">
+		   	<ul class="list-unstyled">
+		   		<li>next contact: {{ contact.next_call }}</li>
+		   		<li>email: <a href="mailto:{{ contact.email }}">{{ contact.email }}</a></li>
+		   		<li>url: <a href="{{ contact.url }}">{{ contact.url }}</a></li>
+		   		<li>mobile: {{ contact.mobile }}</li>
+		   		<li>office: {{ contact.office }}</li>
+		   		<li>created at: {{ contact.created_at }}</li>
+		   		<li>updated at: {{ contact.updated_at }}</li>
+		   	</ul>
+		</div>
+   		<div class="col-md-6">
+		   	<ul class="list-unstyled">
+		   		<li>company: {{ contact.company }}</a></li>
+		   		<li>role: {{ contact.role }}</a></li>
+		   		<li>introduced by: {{ contact.introdued_by }}</li>
+		   		<li>note: {{ contact.note }}</li>
+		   		<li>id: {{ contact.id }}</li>
+		   	</ul>
+		</div>
+   	</div>
+    <p><a class="btn btn-primary btn-lg" role="button">Edit</a></p>
 
 {% else %}
     <p>Egad. Nothing here. contact is empty.</p>
