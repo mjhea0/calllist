@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+
+<ul class="list-unstyled">
+{% for contact in object_list %}
+   	<li>{{contact.next_call }}:: <a href="{% url 'tocall:detail' contact.id %}">{{ contact.first_name }} {{ contact.last_name }}</a></li>
+{% empty %}
+	<li>Nothing here. object_list is empty. Egad.</li>
+{% endfor %}
+</ul>
+{% endblock %}
