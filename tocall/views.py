@@ -18,11 +18,13 @@ class ContactListView(generic.ListView):
 class contact_detail_view(generic.DetailView):
 	model = Contact
 
+@login_required
 def list(request):
-	current_list = Contact.objects.order_by('next_call')
+	current_list = Contact.objects.filter(user=request.user).order_by('next_call')
 	context = {'current_list': current_list}
 	return render(request, 'tocall/list.html', context)
 
+@login_required
 def detail(request, id):
 	contact = get_object_or_404(Contact, id=id)
 	context = {'contact': contact}
@@ -30,10 +32,7 @@ def detail(request, id):
 
 @login_required
 def address_book(request):
-	# addressbook = get_list_or_404(Contact)
-	# addressbook.order_by('last_name')
-	addressbook = Contact.objects.order_by('last_name')
-	# addressbook = Contact.objects.filter(user=User.username)
+	addressbook = Contact.objects.filter(user=request.user).order_by('last_name')
 	context = {'addressbook': addressbook}
 	return render(request, 'tocall/addressbook.html', context)
 
