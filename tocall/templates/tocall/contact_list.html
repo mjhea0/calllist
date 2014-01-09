@@ -3,9 +3,11 @@
 
 <ul class="list-unstyled">
 {% for contact in object_list %}
-   	<li>{{contact.next_call }}:: <a href="{% url 'tocall:detail' contact.id %}">{{ contact.first_name }} {{ contact.last_name }}</a></li>
+   	<li>{{contact.next_call }}:: <a href="{% url 'tocall:detail' contact.id %}">{{ contact.full_name }}</a></li>
 {% empty %}
 	<li>Nothing here. object_list is empty. Egad.</li>
 {% endfor %}
 </ul>
+<br/>
+<small>Contact_list page</small>
 {% endblock %}
