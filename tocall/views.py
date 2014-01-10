@@ -31,6 +31,11 @@ def detail(request, id):
 	context = {'contact': contact, 'history': history}
 	return render(request, 'tocall/detail.html', context)
 
+def history_item(request, id):
+	history = get_object_or_404(History, id=id)
+	context = {'history': history}
+	return render(request, 'tocall/history_item.html', context)
+
 @login_required
 def address_book(request):
 	addressbook = Contact.objects.filter(user=request.user).order_by('last_name')
@@ -42,5 +47,3 @@ def report(request):
 	context = {'report': report}
 	return render(request, 'tocall/report.html', context)
 
-def history_item(request):
-	return HttpResponse("Effort page.")
