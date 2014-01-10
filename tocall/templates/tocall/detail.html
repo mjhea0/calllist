@@ -2,29 +2,31 @@
 {% block content %}
 
 {% if contact %}
-   	<h1>{{ contact.full_name }}</h1>
    	<div class="row">
-   		<div class="col-md-5">
+   		<div class="col-md-4">
+		   	<h1>{{ contact.full_name }}</h1>
 		   	<dl class="dl-horizontal">
 		   		<dt>next contact:</dt><dd> {{ contact.next_call }}</dd>
 		   		<dt>email:</dt><dd> <a href="mailto:{{ contact.email }}">{{ contact.email }}</a></dd>
-		   		<dt>url:</dt><dd> <a href="{{ contact.url }}">{{ contact.url }}</a></dd>
 		   		<dt>mobile:</dt><dd> {{ contact.mobile }}</dd>
 		   		<dt>office:</dt><dd> {{ contact.office }}</dd>
-		   		<dt>created at:</dt><dd> {{ contact.created_at }}</dd>
-		   		<dt>updated at:</dt><dd> {{ contact.updated_at }}</dd>
 		   	</dl>
 		</div>
-   		<div class="col-md-4">
+   		<div class="col-md-5">
 		   	<dl class="dl-horizontal">
+		   		<dt>url:</dt><dd> <a href="{{ contact.url }}">{{ contact.url }}</a></dd>
 		   		<dt>company:</dt><dd> {{ contact.company }}</a></dd>
 		   		<dt>role:</dt><dd> {{ contact.role }}</a></dd>
 		   		<dt>introduced by:</dt><dd> {{ contact.introdued_by }}</dd>
 		   		<dt>note:</dt><dd> {{ contact.note }}</dd>
+		   		<dt>created at:</dt><dd> {{ contact.created_at }}</dd>
+		   		<dt>updated at:</dt><dd> {{ contact.updated_at }}</dd>
 		   		<dt>id:</dt><dd> {{ contact.id }}</dd>
 		   	</dl>
 		</div>
    	</div>
+   	<hr />
+
    	<div class="row">
    		<div class="col-md-4">
     		<a class="btn btn-primary btn-lg" role="button">Post</a>
@@ -44,7 +46,6 @@
 		<table class="table table-condensed">
 			{% for item in history %}
 				<tr>
-					<td><a href="{% url 'tocall:history_item' item.id %}">{{ item.id }}</a></td>
 					<td>
 						{% if item.email_out %}<i class="fa fa-envelope-o"></i> sent{% endif %}
 						{% if item.email_in %}<i class="fa fa-envelope"></i> rec{% endif %}
@@ -58,8 +59,7 @@
 						{% if item.meeting %}<i class="fa fa-users"></i> Met{% endif %}
 					</td>
 					<td>{{ item.write_up }}</td>
-					<td>{{ item.contacted_at }} </td>
-					<td>xxxx</td>
+					<td><a href="{% url 'tocall:history_item' item.id %}">{{ item.contacted_at }}</a></td>
 					<td><a href="{% url 'tocall:history_item' item.id %}">{{ item.id }}</a></td>
 				</tr>
 			{% endfor %}
