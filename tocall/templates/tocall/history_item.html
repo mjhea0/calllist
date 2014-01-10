@@ -2,7 +2,7 @@
 {% block content %}
 
 {% if history %}
-   	<h1>{{ contact.full_name }}</h1>
+   	<h1>{{ history.contact.full_name }}</h1>
    	<dl class="dl-horizontal">
    		<dt>contact:</dt><dd> {{ history.contact.full_name }}</dd>
    		<dt>write up:</dt><dd> {{ history.write_up }}</dd>
@@ -19,7 +19,6 @@
    		<dt>meeting:</dt><dd><i class="fa fa-users"></i>  {{ history.meeting }} </dd>
    		<dt>id:</dt><dd> {{ history.id }}</dd>
    	</dl>
-
 {% else %}
     <p>Egad. Nothing here. history is empty.</p>
 {% endif %}
@@ -43,7 +42,7 @@
 		<li><i class="fa fa-volume-up"></i> voice mail</li>
 		</div>
 		<div class="col-md-3">
-		<li><i class="fa fa-file-text-o"></i> message</li>
+		<li><i class="fa fa-file-text-o"></i> left message</li>
 		<li><i class="fa fa-file-o"></i> no message</li>
 		<li><i class="fa fa-warning"></i> no answer</li>
 		</div>
