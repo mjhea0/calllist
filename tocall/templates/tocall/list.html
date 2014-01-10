@@ -2,13 +2,29 @@
 {% block content %}
 
 {% if current_list %}
-    <ul class="list-unstyled">
-   	{% for contact in current_list %}
-   		<li>{{contact.next_call }}: <a href="{% url 'tocall:detail' contact.id %}">{{ contact.full_name }}</a></li>
-   	{% endfor %}
-    </ul>
+	<div class="row">
+		<div class="col-md-6">
+		    <table class="table table-hover">
+		    	<thead>
+		   		<tr>
+		   			<th scope="col">Next Contact</th>
+		   			<th scope="col">Name</th>
+		   		</tr>
+		   		</thead>
+				<tbody>
+		   	{% for contact in current_list %}
+		   		<tr>
+		   			<td>{{contact.next_call }}</td>
+		   			<td><a href="{% url 'tocall:detail' contact.id %}">{{ contact.full_name }}</a></td>
+		   		</tr>
+		   	{% endfor %}
+		   		</tbody>
+		    </table>
+		    <hr/>
+		</div>
+	</div>
 {% else %}
-    <p>Nothing here. current_list is empty. Egad.</p>
+    <p>Egad. Nothing here. current_list is empty. </p>
 {% endif %}
 
 {% endblock %}

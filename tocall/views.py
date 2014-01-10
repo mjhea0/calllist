@@ -27,7 +27,8 @@ def list(request):
 @login_required
 def detail(request, id):
 	contact = get_object_or_404(Contact, id=id)
-	context = {'contact': contact}
+	history = History.objects.filter(contact=id).order_by('-contacted_at')
+	context = {'contact': contact, 'history': history}
 	return render(request, 'tocall/detail.html', context)
 
 @login_required
@@ -41,5 +42,5 @@ def report(request):
 	context = {'report': report}
 	return render(request, 'tocall/report.html', context)
 
-def effort(request):
+def history_item(request):
 	return HttpResponse("Effort page.")
