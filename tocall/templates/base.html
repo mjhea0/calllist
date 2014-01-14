@@ -37,9 +37,9 @@
           <form class="navbar-form navbar-right" role="form">
               <i class="fa fa-search fa-inverse"></i>
             <div class="form-group">
-              <input type="password" placeholder="Name lookup..." class="form-control">
+              <input type="search" placeholder="Name lookup..." class="form-control">
             </div>
-            <!-- <button type="submit" class="btn btn-success">Search</button> -->
+            <button type="submit" class="btn btn-primary">Search</button>
           </form>
         </div><!--/.nav-collapse -->
       </div>
@@ -47,8 +47,20 @@
     <br/><br/><br/>
 
     <div class="container">
-        {% block content %}
-        {% endblock %}
+      {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+        <li id="message_{{ forloop.counter }}"
+          {% if message.tags %} class="{{ message.tags }}"
+            {% endif %}>
+          {{ message }}  
+          </li>
+      {% endfor %}
+      </ul>
+      {% endif %}
+
+      {% block content %}
+      {% endblock %}
     </div>
 
     <div class="container">

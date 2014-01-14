@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% if history %}
+   	<h1>{{ history.contact.full_name }}</h1>
+   	
+   	<form action="/tocall/list/" method="post">{% csrf_token %}
+   		{{ form.as_p }}
+   		<input type="submit" value="Submit" />
+   	</form>
+ 	
+   		id:  {{ history.id }}
+   	
+{% else %}
+    <p>Egad. Nothing here. history is empty.</p>
+{% endif %}
+	<hr />
+	<!-- this is the icon key -->
+	<div class="row">
+		<div class="col-md-3">
+		<h4>icon key</h4>
+		</div>
+	</div>
+	<div class="row">
+	<ul class="list-unstyled">
+		<div class="col-md-3">
+		<li><i class="fa fa-envelope-o"></i> email sent</li>
+		<li><i class="fa fa-envelope"></i> email recieved</li>
+		<li><i class="fa fa-linkedin-square"></i> email Linkedin</li>
+		</div>
+		<div class="col-md-3">
+		<li><i class="fa fa-phone"></i> call out</li>
+		<li><i class="fa fa-phone-square"></i> call recieved</li>
+		<li><i class="fa fa-volume-up"></i> voice mail</li>
+		</div>
+		<div class="col-md-3">
+		<li><i class="fa fa-file-text-o"></i> left message</li>
+		<li><i class="fa fa-file-o"></i> no message</li>
+		<li><i class="fa fa-warning"></i> no answer</li>
+		</div>
+		<div class="col-md-3">
+		<li><i class="fa fa-users"></i> meeting</li>
+		</div>
+	</ul>
+	</div>
+
+{% endblock %}

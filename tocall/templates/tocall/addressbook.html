@@ -4,8 +4,8 @@
 {% if addressbook %}
     <ul class="list-unstyled">
    	{% for contact in addressbook %}
-   		<li><a href="{% url 'tocall:detail' contact.id %}">{{ contact.full_name }}
-   			{{ contact.role }} {{ contact.company }}</a></li>
+   		<li><a href="{% url 'tocall:detail' contact.id %}">{{ contact.full_name }}</a>
+   			{{ contact.role }} {{ contact.company }}</li>
    	{% endfor %}
     </ul>
 {% else %}
