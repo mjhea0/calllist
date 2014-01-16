@@ -42,7 +42,7 @@ class History(models.Model):
     contacted_at = models.DateTimeField(auto_now_add=True)
 
     def get_absolute_url(self):
-        return reverse("history_detail", kwargs={"last_name": self.last_name})
+        return reverse("history_detail", kwargs={"pk": self.pk})
 
     def __unicode__(self):
         return self.write_up

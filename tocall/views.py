@@ -27,7 +27,7 @@ class HistoryActionMixin(object):
 class HistoryCreateView(LoginRequiredMixin, HistoryActionMixin, CreateView):
 	model = History
 	action = "created"
-	template = 'history_create'
+	# template = 'history_create'
 
 	def form_valid(self, form):
 		
