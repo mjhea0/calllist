@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
-{% if history %}
+{% if contact %}
    	<h1>{{ history.contact.full_name }}</h1>
    	{% load crispy_forms_tags %} 
 
@@ -14,7 +14,7 @@
    		id:  {{ history.id }}
    	
 {% else %}
-    <p>Egad. Nothing here. history is empty. History update form</p>
+    <p>Egad. WTF!!!! Nothing here. history is empty. History create form</p>
 {% endif %}
 {% include "iconkey.html" %}
 

@@ -30,6 +30,7 @@
    	<div class="row">
    		<div class="col-md-4">
     		<a class="btn btn-primary btn-lg" role="button">Post</a>
+    		<a href="{% url 'tocall:history_create' contact.id %}">Add History</a>
     	</div>
    		<div class="col-md-4 col-md-offset-4">
 		    <a class="btn btn-danger btn-sm" role="button">Edit contact</a>
@@ -68,38 +69,12 @@
 {% else %}
     <p>Egad. Nothing here. history is empty.</p>
 {% endif %}
-	<hr />
-	<!-- this is the icon key -->
-	<div class="row">
-		<div class="col-md-3">
-		<h4>icon key</h4>
-		</div>
-	</div>
-	<div class="row">
-	<ul class="list-unstyled">
-		<div class="col-md-3">
-		<li><i class="fa fa-envelope-o"></i> email sent</li>
-		<li><i class="fa fa-envelope"></i> email recieved</li>
-		<li><i class="fa fa-linkedin-square"></i> email Linkedin</li>
-		</div>
-		<div class="col-md-3">
-		<li><i class="fa fa-phone"></i> call out</li>
-		<li><i class="fa fa-phone-square"></i> call recieved</li>
-		<li><i class="fa fa-volume-up"></i> voice mail</li>
-		</div>
-		<div class="col-md-3">
-		<li><i class="fa fa-file-text-o"></i> left message</li>
-		<li><i class="fa fa-file-o"></i> no message</li>
-		<li><i class="fa fa-warning"></i> no answer</li>
-		</div>
-		<div class="col-md-3">
-		<li><i class="fa fa-users"></i> meeting</li>
-		</div>
-	</ul>
-	</div>
+	
+{% include "iconkey.html" %}
 
 <span class="fa-stack fa-lg">
   <i class="fa fa-cloud fa-stack-1x"></i>
   <i class="fa fa-bars fa-rotate-90 fa-stack-1x"></i>
 </span>
+
 {% endblock %}

@@ -6,10 +6,39 @@ from .views import ContactListView, HistoryCreateView, HistoryDetailView, Histor
 urlpatterns = patterns('',
 	# ex: /tocall/
 	# url(r'^$', ContactListView.as_view(), name='contact_list'),   # Generic unfiltered, unsorted
-	url(r'^list/$', views.list, name='list'),
-	url(r'^detail/(?P<id>\d+)/', views.detail, name='detail'),
-	url(r'^address_book/$', views.address_book, name='address_book'),
-	url(r'^history_item/(?P<id>\d+)/', views.history_item, name='history_item'),
-	url(r'^report/$', views.report, name='report'),
-	url(r'^cbv/(?P<pk>\d+)/', views.HistoryUpdateView.as_view(), name='history_update'),
+	url(
+		regex=r'^list/$', 
+		view=views.list, 
+		name='list'
+		),
+	url(
+		regex=r'^detail/(?P<id>\d+)/', 
+		view=views.detail, 
+		name='detail'
+		),
+	url(
+		regex=r'^address_book/$', 
+		view=views.address_book, 
+		name='address_book'
+		),
+	url(
+		regex=r'^history_item/(?P<id>\d+)/', 
+		view=views.history_item, 
+		name='history_item'
+		),
+	url(
+		regex=r'^report/$', 
+		view=views.report, 
+		name='report'
+		),
+	url(
+		regex=r'^cbv/(?P<pk>\d+)/', 
+		view=views.HistoryUpdateView.as_view(), 
+		name='history_update'
+		),
+    url(
+		regex=r'^create/(?P<pk>\d+)/', 
+		view=views.HistoryCreateView.as_view(), 
+		name='history_create'
+		),
 )

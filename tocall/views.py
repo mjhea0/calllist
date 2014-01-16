@@ -5,9 +5,10 @@ from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.views.generic import CreateView, UpdateView, DetailView, ListView
-from django.forms import ModelForms
+from django.forms import ModelForm
 
 from braces.views import LoginRequiredMixin
+from crispy_forms.helper import FormHelper
 
 from .models import Contact, History
 
@@ -26,10 +27,20 @@ class HistoryActionMixin(object):
 class HistoryCreateView(LoginRequiredMixin, HistoryActionMixin, CreateView):
 	model = History
 	action = "created"
+	template = 'history_create'
+
+	def form_valid(self, form):
+		
+		return super(HistoryCreateView, self).form_valid(form)
 
 class HistoryUpdateView(LoginRequiredMixin, HistoryActionMixin, UpdateView):
 	model = History
 	action = "updated"
+	# template = "history_form.html"
+
+	def form_valid(self, form):
+		
+		return super(HistoryUpdateView, self).form_valid(form)
 
 class HistoryDetailView(DetailView):
 	model = History

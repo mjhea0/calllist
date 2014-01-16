@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 
 class Contact(models.Model):
     user = models.ForeignKey(User)
@@ -39,6 +40,9 @@ class History(models.Model):
     meeting = models.BooleanField(default=False)
     write_up = models.TextField(blank=True)
     contacted_at = models.DateTimeField(auto_now_add=True)
+
+    def get_absolute_url(self):
+        return reverse("history_detail", kwargs={"last_name": self.last_name})
 
     def __unicode__(self):
         return self.write_up
