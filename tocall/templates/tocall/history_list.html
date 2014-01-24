@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+
+   	<h1>{{ contact }}</h1>
+      <ul>
+         {% for item in history_list %}
+            <li>{{ item.contacted_at }} | {{ item.write_up }}</li>
+         {% endfor %}
+      </ul>
+
+{% include "iconkey.html" %}
+<br />
+<hr />
+<small>history_list.html page</small>
+{% endblock %}
+

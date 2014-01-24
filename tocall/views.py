@@ -1,16 +1,63 @@
-from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse, HttpResponseRedirect
 from django.core.urlresolvers import reverse
-# from django.contrib.auth.decorators import login_required
-from django.contrib.auth.models import User
+from django.shortcuts import render, get_object_or_404
+from django.http import HttpResponseRedirect #, HttpResponse
 from django.contrib import messages
-from django.views.generic import CreateView, UpdateView, DetailView, ListView
-from django.forms import ModelForm
+from django.views.generic import DetailView, ListView, CreateView
+from django.views.generic.edit import UpdateView #, ModelFormMixin
 
 from braces.views import LoginRequiredMixin
-from crispy_forms.helper import FormHelper
+# from crispy_forms.helper import FormHelper
 
 from .models import Contact, History
+
+class ContactActionMixin(object):
+
+	@property
+	def action(self):
+		msg = "{0} is missing action.".format(self.__class__)
+		raise NotImplementedError(msg)
+
+	def form_valid(self, form):
+		msg = "Contact {0}!".format(self.action)
+		messages.info(self.request, msg)
+		return super(ContactActionMixin, self).form_valid(form)
+
+class ContactListView(ListView):
+	model = Contact
+
+	def get_queryset(self):
+		return Contact.objects.filter(user=self.request.user).order_by('next_call')
+
+class ContactDetailView(DetailView):
+	model = Contact
+	template_name = "tocall/contact_detail.html"
+
+	def get_context_data(self, **kwargs):
+		context = super(ContactDetailView, self).get_context_data(**kwargs)
+		# add the history
+		context['history'] = History.objects.filter(contact=self.kwargs.get("pk", None)).order_by('-contacted_at')
+		# get_object_or_404(Contact, pk=self.kwargs.get("pk", None)).full_name
+		return context
+
+
+class ContactCreateView(CreateView):
+	model = Contact
+	fields = ['first_name', 'last_name', 'email', 'mobile', 'next_call']
+	template_name = "tocall/contact_create.html"
+
+	def form_valid(self, form):
+		form.instance.user = self.request.user
+		return super(ContactCreateView, self).form_valid(form)
+
+class ContactUpdateView(ContactActionMixin, UpdateView):
+	model = Contact	
+	fields = '__all__'
+	
+	def get_success_url(self):
+		return reverse('contact_detail')
+
+	# other_list = ['first_name', 'last_name', 'company', 'role', 'office', 'mobile', 'email', 'url', 
+		# 'next_call', 'note', 'introduced_by', 'created_at', 'updated_at']
 
 class HistoryActionMixin(object):
 
@@ -24,8 +71,25 @@ class HistoryActionMixin(object):
 		messages.info(self.request, msg)
 		return super(HistoryActionMixin, self).form_valid(form)
 
+class HistoryListView(ListView):
+	# model = History
+
+	def get_queryset(self):
+		# self.contact = get_object_or_404(Contact, pk=self.kwargs.get("pk", None))
+		return History.objects.filter(contact=self.kwargs.get("pk", None)).order_by('-contacted_at')
+
+	def get_context_data(self, **kwargs):
+		context = super(HistoryListView, self).get_context_data(**kwargs)
+		# add the contact
+		context['contact'] = get_object_or_404(Contact, pk=self.kwargs.get("pk", None)).full_name
+		return context
+
 class HistoryCreateView(LoginRequiredMixin, HistoryActionMixin, CreateView):
 	model = History
+
+	fields = ['contact', 'write_up', 'email_in', 'email_out', 
+		'email_linkedin', 'call_in', 'call_out', 'voice_mail', 'message', 
+		'no_message', 'no_answer', 'meeting']
 	action = "created"
 	# template = 'history_create'
 
@@ -37,6 +101,7 @@ class HistoryUpdateView(LoginRequiredMixin, HistoryActionMixin, UpdateView):
 	model = History
 	action = "updated"
 	# template = "history_form.html"
+	# self.contact = get_object_or_404(Contact, pk=self.kwargs.get("pk", None))
 
 	def form_valid(self, form):
 		
@@ -44,16 +109,6 @@ class HistoryUpdateView(LoginRequiredMixin, HistoryActionMixin, UpdateView):
 
 class HistoryDetailView(DetailView):
 	model = History
-
-class ContactListView(ListView):
-	model = Contact
-
-	def get_context_data(self, **kwargs):
-		context = super(ContactListView, self).get_context_data(**kwargs)
-		return context
-
-class contact_detail_view(DetailView):
-	model = Contact
 
 def list(request):
 	current_list = Contact.objects.filter(user=request.user).order_by('next_call')

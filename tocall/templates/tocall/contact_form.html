@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Contact Create</h1>
+Contact id: {{ contact.id }} <br />
+<a href="{% url 'tocall:contact_list' %}">back to list</a> <br />
+
+	<table>
+	<form action="{% url 'tocall:contact_detail' contact.id %}" method="post">{% csrf_token %}
+	{{ form.as_table }}
+	<input type="submit" value="Submit" />
+	</form>
+	</table>
+{% if form.subject.errors %}
+	<h1>Error City</h1>
+    <ol>
+    {% for error in form.subject.errors %}
+        <li><strong>{{ error|escape }}</strong></li>
+    {% endfor %}
+    </ol>
+{% endif %}
+<br /><br /><br /><br /><hr />
+<small>this page is contact_form.html</small>
+{% endblock %}
+

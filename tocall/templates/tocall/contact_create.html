@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+
+<h1>Contact Create</h1>
+<br />
+
+	<table>
+	<form action="" method="post">{% csrf_token %}
+	{{ form.as_table }}
+	<input type="submit" value="Submit" />
+	</form>
+	</table>
+
+{% if form.subject.errors %}
+	<h1>Error City</h1>
+    <ol>
+    {% for error in form.subject.errors %}
+        <li><strong>{{ error|escape }}</strong></li>
+    {% endfor %}
+    </ol>
+{% endif %}
+<br /><br /><br /><br /><hr />
+<small>this page is contact_create.html</small>
+{% endblock %}
+

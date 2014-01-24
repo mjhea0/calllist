@@ -5,16 +5,18 @@
    	<h1>{{ history.contact.full_name }}</h1>
    	{% load crispy_forms_tags %} 
 
-   	<form action="{% url 'tocall:list' %}" method="post" class="bootstrap3">
+{# {% url 'tocall:list' %} #}
+
+   	<form action="" method="post" class="bootstrap3">
    		{% csrf_token %}
    		{{ form.as_ul }}
-   		<input type="submit" value="Submit" />
+   		<input type="submit" value="Update" />
    	</form>
  	
    		id:  {{ history.id }}
    	
 {% else %}
-    <p>Egad. Nothing here. history is empty. History update form</p>
+    <p>Egad. Nothing here. history is empty. History update</p>
 {% endif %}
 {% include "iconkey.html" %}
 
