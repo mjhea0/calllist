@@ -43,7 +43,7 @@ class ContactDetailView(DetailView):
 class ContactCreateView(CreateView):
 	model = Contact
 	fields = ['first_name', 'last_name', 'email', 'mobile', 'next_call']
-	template_name = "tocall/contact_create.html"
+	template_name_suffix = "_create_form"
 
 	def form_valid(self, form):
 		form.instance.user = self.request.user
@@ -72,7 +72,7 @@ class HistoryActionMixin(object):
 		return super(HistoryActionMixin, self).form_valid(form)
 
 class HistoryListView(ListView):
-	# model = History
+	model = History
 
 	def get_queryset(self):
 		# self.contact = get_object_or_404(Contact, pk=self.kwargs.get("pk", None))
@@ -86,15 +86,18 @@ class HistoryListView(ListView):
 
 class HistoryCreateView(LoginRequiredMixin, HistoryActionMixin, CreateView):
 	model = History
-
-	fields = ['contact', 'write_up', 'email_in', 'email_out', 
-		'email_linkedin', 'call_in', 'call_out', 'voice_mail', 'message', 
-		'no_message', 'no_answer', 'meeting']
+	fields = '__all__'
 	action = "created"
-	# template = 'history_create'
+	template_name_suffix = '_create_form'
+
+	def get_context_data(self, **kwargs):
+		context = super(HistoryCreateView, self).get_context_data(**kwargs)
+		# add the contact
+		context['contact'] = get_object_or_404(Contact, pk=self.kwargs.get("pk", None)).full_name
+		return context
 
 	def form_valid(self, form):
-		
+		form.instance.user = self.request.user
 		return super(HistoryCreateView, self).form_valid(form)
 
 class HistoryUpdateView(LoginRequiredMixin, HistoryActionMixin, UpdateView):

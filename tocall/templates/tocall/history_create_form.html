@@ -8,13 +8,13 @@
    	<h1>{{ history.contact.full_name }}</h1>
    	{% load crispy_forms_tags %} 
 
-   	<form action="{% url 'tocall:history_list' %}" method="post" class="bootstrap3">
+   	<form action="{% url 'tocall:history_list' contact.id %}" method="post" class="bootstrap3">
    		{% csrf_token %}
    		{{ form.as_ul }}
    		<input type="submit" value="Submit" />
    	</form>
  	
-   		id:  {{ contact.id }}
+   		Contact id:  {{ contact.id }}
    	
 {% else %}
     <p>Egad. WTF!!!! Nothing here. history is empty. History create form</p>
