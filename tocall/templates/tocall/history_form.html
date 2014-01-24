@@ -5,14 +5,13 @@
    	<h1>{{ history.contact.full_name }}</h1>
    	{% load crispy_forms_tags %} 
 
-{# {% url 'tocall:list' %} #}
-
+      <table>
    	<form action="" method="post" class="bootstrap3">
    		{% csrf_token %}
-   		{{ form.as_ul }}
+   		{{ form.as_table }}
    		<input type="submit" value="Update" />
    	</form>
- 	
+ 	    </table>
    		id:  {{ history.id }}
    	
 {% else %}

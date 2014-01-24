@@ -84,7 +84,7 @@ class HistoryListView(ListView):
 		context['contact'] = get_object_or_404(Contact, pk=self.kwargs.get("pk", None)).full_name
 		return context
 
-class HistoryCreateView(LoginRequiredMixin, HistoryActionMixin, CreateView):
+class HistoryCreateView(CreateView):
 	model = History
 	fields = '__all__'
 	action = "created"

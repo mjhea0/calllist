@@ -2,17 +2,16 @@
 {% block content %}
 
 
-<hr />
-<h6>old junk below</h6>
 {% if contact %}
    	<h1>{{ history.contact.full_name }}</h1>
    	{% load crispy_forms_tags %} 
-
-   	<form action="{% url 'tocall:history_list' contact.id %}" method="post" class="bootstrap3">
+      <table>
+   	<form action="" method="post" class="bootstrap3">
    		{% csrf_token %}
-   		{{ form.as_ul }}
+   		{{ form.as_table }}
    		<input type="submit" value="Submit" />
    	</form>
+      </table>
  	
    		Contact id:  {{ contact.id }}
    	
