@@ -24,7 +24,7 @@ class Contact(models.Model):
     full_name = property(_get_full_name)
 
     def get_absolute_url(self):
-        return reverse("contact_detail", kwargs={"pk": self.pk})
+        return reverse("tocall:contact_detail", kwargs={"pk": self.pk})
 
     def __unicode__(self):
         return self.last_name 

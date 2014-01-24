@@ -52,11 +52,12 @@ class ContactCreateView(CreateView):
 class ContactUpdateView(ContactActionMixin, UpdateView):
 	model = Contact	
 	fields = '__all__'
+	action = "updated"
 	template_name_suffix = '_update_form'
 
 	def form_valid(self, form):
-		context = self.get_context_data(form=form)
-		return self.render_to_response(context)
+		form.instance.user = self.request.user
+		return super(ContactUpdateView, self).form_valid(form)
 
 class HistoryActionMixin(object):
 

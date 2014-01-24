@@ -8,7 +8,7 @@ Contact id: {{ contact.id }} <br />
 	<table>
 	<form action="" method="post">{% csrf_token %}
 	{{ form.as_table }}
-	<input type="submit" value="Submit" />
+	<input type="submit" value="Update" />
 	</form>
 	</table>
 {% if form.subject.errors %}
