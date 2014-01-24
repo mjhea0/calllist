@@ -52,12 +52,11 @@ class ContactCreateView(CreateView):
 class ContactUpdateView(ContactActionMixin, UpdateView):
 	model = Contact	
 	fields = '__all__'
-	
-	def get_success_url(self):
-		return reverse('contact_detail')
+	template_name_suffix = '_update_form'
 
-	# other_list = ['first_name', 'last_name', 'company', 'role', 'office', 'mobile', 'email', 'url', 
-		# 'next_call', 'note', 'introduced_by', 'created_at', 'updated_at']
+	def form_valid(self, form):
+		context = self.get_context_data(form=form)
+		return self.render_to_response(context)
 
 class HistoryActionMixin(object):
 
