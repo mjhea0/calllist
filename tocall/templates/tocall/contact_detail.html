@@ -60,7 +60,7 @@
 						{% if item.meeting %}<i class="fa fa-users"></i> Met{% endif %}
 					</td>
 					<td>{{ item.write_up }}</td>
-					<td><a href="{% url 'tocall:history_item' item.id %}">{{ item.contacted_at }}</a></td>
+					<td><a href="{% url 'tocall:history_detail' item.id %}">{{ item.contacted_at }}</a></td>
 					<td><a href="{% url 'tocall:history_update' item.id %}">{{ item.id }}</a></td>
 				</tr>
 			{% endfor %}

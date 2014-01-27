@@ -114,20 +114,11 @@ class HistoryUpdateView(LoginRequiredMixin, HistoryActionMixin, UpdateView):
 	# self.contact = get_object_or_404(Contact, pk=self.kwargs.get("pk", None))
 
 	def form_valid(self, form):
-		
 		return super(HistoryUpdateView, self).form_valid(form)
 
 class HistoryDetailView(DetailView):
 	model = History
-
-def history_item(request, id):
-	history = get_object_or_404(History, id=id)
-	context = {'history': history}
-	return render(request, 'tocall/history_item.html', context)
-
-def edit(request, id):
-	contact = get_object_or_404(Contact, id=id)
-	return HttpResponseRedirect('tocall/detail.html')
+	template_name_suffix = '_detail'
 
 def report(request):
 	report = "Here will be some sort of reporting analytics."

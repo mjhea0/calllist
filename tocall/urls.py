@@ -32,14 +32,9 @@ urlpatterns = patterns('',
     	name='history_list'
     	),
 	url(
-		regex=r'^history_item/(?P<id>\d+)/', 
-		view=views.history_item, 
-		name='history_item'
-		),
-	url(
-		regex=r'^report/$', 
-		view=views.report, 
-		name='report'
+		regex=r'^history/(?P<pk>\d+)/', 
+		view=views.HistoryDetailView.as_view(), 
+		name='history_detail'
 		),
 	url(
 		regex=r'^history/update/(?P<pk>\d+)/', 
@@ -55,5 +50,10 @@ urlpatterns = patterns('',
 		regex=r'^address_book/$', 
 		view=views.ContactAddressBookView.as_view(), 
 		name='address_book'
+		),
+	url(
+		regex=r'^report/$', 
+		view=views.report, 
+		name='report'
 		),
 )
