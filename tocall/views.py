@@ -120,15 +120,6 @@ class HistoryUpdateView(LoginRequiredMixin, HistoryActionMixin, UpdateView):
 class HistoryDetailView(DetailView):
 	model = History
 
-def history_item(request, id):
-	history = get_object_or_404(History, id=id)
-	context = {'history': history}
-	return render(request, 'tocall/history_item.html', context)
-
-def edit(request, id):
-	contact = get_object_or_404(Contact, id=id)
-	return HttpResponseRedirect('tocall/detail.html')
-
 def report(request):
 	report = "Here will be some sort of reporting analytics."
 	context = {'report': report}
