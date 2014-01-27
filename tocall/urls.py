@@ -7,11 +7,6 @@ from .views import ContactListView, ContactCreateView, HistoryCreateView, Histor
 
 urlpatterns = patterns('',
 	url(
-		regex=r'^list/$', 
-		view=views.list, 
-		name='list'
-		),
-	url(
 		regex=r'^contact/list/$', 
 		view=views.ContactListView.as_view(), 
 		name='contact_list'
@@ -37,11 +32,6 @@ urlpatterns = patterns('',
     	name='history_list'
     	),
 	url(
-		regex=r'^detail/(?P<id>\d+)/', 
-		view=views.detail, 
-		name='detail'
-		),
-	url(
 		regex=r'^history_item/(?P<id>\d+)/', 
 		view=views.history_item, 
 		name='history_item'
@@ -63,7 +53,7 @@ urlpatterns = patterns('',
 		),
 	url(
 		regex=r'^address_book/$', 
-		view=views.address_book, 
+		view=views.ContactAddressBookView.as_view(), 
 		name='address_book'
 		),
 )

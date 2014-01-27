@@ -1,17 +1,30 @@
 {% extends "base.html" %}
 {% block content %}
 
-<ul class="list-unstyled">
-{% for contact in object_list %}
-   	<li>{{ contact.next_call }}:: <a href="{% url 'tocall:history_list' contact.id %}">{{ contact.full_name }}</a> :: <a href="{% url 'tocall:contact_update' contact.id %}">update</a> :: 
-   		<a href="{% url 'tocall:contact_detail' contact.id %}">detail</a> :: 
+	<div class="row">
+		<div class="col-md-6">
+		    <table class="table table-hover">
+		    	<thead>
+		   		<tr>
+		   			<th scope="col">Next Contact</th>
+		   			<th scope="col">Name</th>
+		   		</tr>
+		   		</thead>
+				<tbody>
+		   	{% for contact in object_list %}
+		   		<tr>
+		   			<td>{{contact.next_call }}</td>
+		   			<td><a href="{% url 'tocall:contact_detail' contact.id %}">{{ contact.full_name }}</a> </td>
+		   			<td><a href="{% url 'tocall:contact_update' contact.id %}">update</a> </td>
+   					<td><a href="{% url 'tocall:history_list' contact.id %}">detail</a> </td>
+		   		</tr>
+		   	{% endfor %}
+		   		</tbody>
+		    </table>
+		    <hr/>
+		</div>
+	</div>
 
-   		add the last write up here
-   	</li>
-{% empty %}
-	<li>Egad. Nothing here. object_list is empty. Egad.</li>
-{% endfor %}
-</ul>
 <br /><br /><br /><br /><hr />
 <small>this page is contact_list.html</small>
 {% endblock %}

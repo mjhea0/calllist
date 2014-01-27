@@ -28,9 +28,16 @@ class ContactListView(ListView):
 	def get_queryset(self):
 		return Contact.objects.filter(user=self.request.user).order_by('next_call')
 
+class ContactAddressBookView(ListView):
+	model = Contact
+	template_name_suffix = '_addressbook'
+
+	def get_queryset(self):
+		return Contact.objects.filter(user=self.request.user).order_by('last_name')
+
 class ContactDetailView(DetailView):
 	model = Contact
-	template_name = "tocall/contact_detail.html"
+	template_name_suffix = "_detail"
 
 	def get_context_data(self, **kwargs):
 		context = super(ContactDetailView, self).get_context_data(**kwargs)
@@ -113,17 +120,6 @@ class HistoryUpdateView(LoginRequiredMixin, HistoryActionMixin, UpdateView):
 class HistoryDetailView(DetailView):
 	model = History
 
-def list(request):
-	current_list = Contact.objects.filter(user=request.user).order_by('next_call')
-	context = {'current_list': current_list}
-	return render(request, 'tocall/list.html', context)
-
-def detail(request, id):
-	contact = get_object_or_404(Contact, id=id)
-	history = History.objects.filter(contact=id).order_by('-contacted_at')
-	context = {'contact': contact, 'history': history}
-	return render(request, 'tocall/detail.html', context)
-
 def history_item(request, id):
 	history = get_object_or_404(History, id=id)
 	context = {'history': history}
@@ -133,13 +129,7 @@ def edit(request, id):
 	contact = get_object_or_404(Contact, id=id)
 	return HttpResponseRedirect('tocall/detail.html')
 
-def address_book(request):
-	addressbook = Contact.objects.filter(user=request.user).order_by('last_name')
-	context = {'addressbook': addressbook}
-	return render(request, 'tocall/addressbook.html', context)
-
 def report(request):
 	report = "Here will be some sort of reporting analytics."
 	context = {'report': report}
 	return render(request, 'tocall/report.html', context)
-
