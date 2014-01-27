@@ -33,7 +33,7 @@
     		<a href="{% url 'tocall:history_create' contact.id %}">Add History</a>
     	</div>
    		<div class="col-md-4 col-md-offset-4">
-		    <a class="btn btn-danger btn-sm" role="button">Edit contact</a>
+		    <a href="{% url 'tocall:contact_update' contact.id %}" class="btn btn-danger btn-sm" role="button">Edit contact</a>
 		</div>
 	</div>
 

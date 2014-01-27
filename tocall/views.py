@@ -7,6 +7,7 @@ from django.views.generic.edit import UpdateView #, ModelFormMixin
 
 from braces.views import LoginRequiredMixin
 # from crispy_forms.helper import FormHelper
+import datetime
 
 from .models import Contact, History
 
@@ -26,7 +27,10 @@ class ContactListView(ListView):
 	model = Contact
 
 	def get_queryset(self):
-		return Contact.objects.filter(user=self.request.user).order_by('next_call')
+		# return Contact.objects.filter(user=self.request.user).order_by('next_call')
+		return Contact.objects.filter(
+			user=self.request.user).filter(
+			next_call__lte=datetime.date.today()).order_by('next_call')
 
 class ContactAddressBookView(ListView):
 	model = Contact
@@ -45,7 +49,6 @@ class ContactDetailView(DetailView):
 		context['history'] = History.objects.filter(contact=self.kwargs.get("pk", None)).order_by('-contacted_at')
 		# get_object_or_404(Contact, pk=self.kwargs.get("pk", None)).full_name
 		return context
-
 
 class ContactCreateView(CreateView):
 	model = Contact
@@ -100,7 +103,9 @@ class HistoryCreateView(CreateView):
 	def get_context_data(self, **kwargs):
 		context = super(HistoryCreateView, self).get_context_data(**kwargs)
 		# add the contact
-		context['contact'] = get_object_or_404(Contact, pk=self.kwargs.get("pk", None)).full_name
+		context['contact'] = get_object_or_404(Contact, pk=self.kwargs.get("pk", None))
+		# add the history
+		context['past'] = History.objects.filter(pk=self.kwargs.get("pk", None)).order_by('-contacted_at')
 		return context
 
 	def form_valid(self, form):
