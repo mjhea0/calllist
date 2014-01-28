@@ -8,6 +8,9 @@
 		   		<tr>
 		   			<th scope="col">Next Contact</th>
 		   			<th scope="col">Name</th>
+		   			<th scope="col">Connection</th>
+		   			<th scope="col">update</th>
+		   			<th scope="col">detail</th>
 		   		</tr>
 		   		</thead>
 				<tbody>
@@ -15,6 +18,7 @@
 		   		<tr>
 		   			<td>{{contact.next_call }}</td>
 		   			<td><a href="{% url 'tocall:contact_detail' contact.id %}">{{ contact.full_name }}</a> </td>
+		   			<td>{{ contact.introduced_by }}</td>
 		   			<td><a href="{% url 'tocall:contact_update' contact.id %}">update</a> </td>
    					<td><a href="{% url 'tocall:history_list' contact.id %}">detail</a> </td>
 		   		</tr>
