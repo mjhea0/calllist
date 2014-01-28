@@ -52,7 +52,7 @@ class ContactDetailView(DetailView):
 
 class ContactCreateView(CreateView):
 	model = Contact
-	fields = ['first_name', 'last_name', 'email', 'mobile', 'next_call', 'introduced_by']
+	fields = ['first_name', 'last_name', 'email', 'mobile', 'introduced_by', 'next_call']
 	template_name_suffix = "_create_form"
 
 	def form_valid(self, form):
