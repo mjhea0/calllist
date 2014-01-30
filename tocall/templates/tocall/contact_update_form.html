@@ -1,16 +1,16 @@
 {% extends "base.html" %}
 {% block content %}
 
-<h1>Contact Update</h1>
-Contact id: {{ contact.id }} <br />
-<a href="{% url 'tocall:contact_list' %}">back to list</a> <br />
+<h1>Contact Update   <a href="{% url 'tocall:contact_list' %}" class="btn btn-info btn-sm" role="button">back to list</a> </h1>
 
 	<table>
 	<form action="" method="post">{% csrf_token %}
 	{{ form.as_table }}
-	<input type="submit" value="Update" />
+	<input type="submit" value="Update" class="btn btn-primary btn-sm" role="button"/>
 	</form>
 	</table>
+  Contact id: {{ contact.id }} <br />
+
 {% if form.subject.errors %}
 	<h1>Error City</h1>
     <ol>
@@ -20,7 +20,7 @@ Contact id: {{ contact.id }} <br />
     </ol>
 {% endif %}
 <br /><br /><br /><br /><hr />
-<small>this page is contact_update_form.html</small>
+<small>contact_update_form.html</small>
 {% endblock %}
 
 <!-- from django snippets -->

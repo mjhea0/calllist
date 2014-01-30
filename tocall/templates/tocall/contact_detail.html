@@ -28,11 +28,10 @@
    	<hr />
 
    	<div class="row">
-   		<div class="col-md-4">
-    		<a class="btn btn-primary btn-lg" role="button">Post</a>
-    		<a href="{% url 'tocall:history_create' contact.id %}">Add History</a>
+   		<div class="col-md-3">
+    		<a href="{% url 'tocall:history_create' contact.id %}" class="btn btn-primary btn-sm" role="button">Add History</a>
     	</div>
-   		<div class="col-md-4 col-md-offset-4">
+   		<div class="col-md-3 col-md-offset-3">
 		    <a href="{% url 'tocall:contact_update' contact.id %}" class="btn btn-danger btn-sm" role="button">Edit contact</a>
 		</div>
 	</div>
@@ -77,6 +76,6 @@
   <i class="fa fa-bars fa-rotate-90 fa-stack-1x"></i>
 </span>
 <br /><br /><br /><br /><hr />
-<small>this page is contact_detail.html</small>
+<small>contact_detail.html</small>
 
 {% endblock %}
