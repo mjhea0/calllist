@@ -27,7 +27,8 @@ class ContactListView(ListView):
 	model = Contact
 
 	def get_queryset(self):
-		# return Contact.objects.filter(user=self.request.user).order_by('next_call')
+		# Hey Michael, if the list is done I want a nice big 'Congrtulations! You're done'
+		# maybe a bootstrap jumbotron if it's not too tough.
 		return Contact.objects.filter(
 			user=self.request.user).filter(
 			next_call__lte=datetime.date.today()).order_by('next_call')
