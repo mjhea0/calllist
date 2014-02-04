@@ -3,49 +3,26 @@
 {% block content %}
 
 {% if contact %}
+{% include "contact_head.html" %}
 
       <div class="row">
-         <div class="col-md-4">
-            <h1>{{ contact.full_name }}</h1>
-            <dl class="dl-horizontal">
-               <dt>next contact:</dt><dd> {{ contact.next_call }}</dd>
-               <dt>email:</dt><dd> <a href="mailto:{{ contact.email }}">{{ contact.email }}</a></dd>
-               <dt>mobile:</dt><dd> {{ contact.mobile }}</dd>
-               <dt>office:</dt><dd> {{ contact.office }}</dd>
-            </dl>
-      </div>
-         <div class="col-md-5">
-            <dl class="dl-horizontal">
-               <dt>url:</dt><dd> <a href="{{ contact.url }}">{{ contact.url }}</a></dd>
-               <dt>company:</dt><dd> {{ contact.company }}</a></dd>
-               <dt>role:</dt><dd> {{ contact.role }}</a></dd>
-               <dt>introduced by:</dt><dd> {{ contact.introduced_by }}</dd>
-               <dt>note:</dt><dd> {{ contact.note }}</dd>
-               <dt>created at:</dt><dd> {{ contact.created_at }}</dd>
-               <dt>updated at:</dt><dd> {{ contact.updated_at }}</dd>
-               <dt>id:</dt><dd> {{ contact.id }}</dd>
-            </dl>
-      </div>
-      </div>
-      <hr />
-
-      <div class="row">
-         <div class="col-md-4">
-      </div>
          <div class="col-md-3 col-md-offset-3">
-          <a href="{% url 'tocall:contact_update' contact.id %}" class="btn btn-danger btn-sm" role="button">Edit contact</a>
+             <a href="{% url 'tocall:contact_update' contact.id %}" class="btn btn-danger btn-sm" role="button">Edit contact</a>
+         </div>
       </div>
-   </div>
+<hr />
+
+    <table>
+      <form action="" method="post" class="bootstrap3">
+         {% csrf_token %}
+         {{ form.as_table }}
+         <input class="btn btn-primary btn-sm" type="submit" value=" Post " role="button" />
+      </form>
+    </table>
 
 
-      <table>
-   	<form action="" method="post" class="bootstrap3">
-   		{% csrf_token %}
-   		{{ form.as_table }}
-   		<input class="btn btn-primary btn-sm" type="submit" value=" Post " role="button" />
-   	</form>
-      </table>
- 	
+<hr />
+      
    		Contact id:  {{ contact.id }}
    	
 {% else %}

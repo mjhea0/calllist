@@ -1,0 +1,48 @@
+{% extends "base_reg.html" %}
+{% block content %}
+
+{% if user.is_authenticated %}
+    <p>Welcome, {{ user.username }}. You are already logged in.</p>
+{% else %}
+    <h3>Welcome. Please log in or register.</h3>
+{% endif %}
+<div class="row">
+	<div class="col-md-4">
+		<h1>Sign In</h1>
+
+		{% if form.errors %}
+		<p>Your username and password didn't match. Please try again.</p>
+		{% endif %}
+
+		<table>
+		<tr>
+		<form action="/accounts/auth/" method="post">{% csrf_token %}
+           <td><label for="username">User name:</label></td>
+            <td><input type="text" name="username" value="" id="username"></td>
+           </tr>
+           <tr>  
+            <td><label for="password">Password:</label></td>
+            <td><input type="password" name="password" value="" id="password"></td>
+           </tr>
+           <tr>  
+            <td><input class="btn btn-primary btn-sm" type="submit" value="Sign In" /></td>
+		</form>
+		</tr>
+		</table>
+
+	</div>
+	<div class="col-md-4">
+		<h1>Sign Up</h1>
+
+		<table>
+		<form action="/accounts/register/" method="POST"> {% csrf_token %}
+		    {{ form.as_table }}
+		<input class="btn btn-primary btn-sm" type="submit" value="Sign up">
+		</form>
+		</table>
+
+	</div>
+</div>
+
+
+{% endblock %}
