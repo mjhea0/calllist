@@ -31,6 +31,11 @@ urlpatterns = patterns('',
     	view=views.HistoryListView.as_view(),
     	name='history_list'
     	),
+	 url(
+    	regex=r'^history/list/TEST/(?P<pk>\d+)/',
+    	view=views.HistoryListViewTEST.as_view(),
+    	name='history_list_test'
+    	),
 	url(
 		regex=r'^history/(?P<pk>\d+)/', 
 		view=views.HistoryDetailView.as_view(), 

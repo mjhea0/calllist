@@ -5,7 +5,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic import DetailView, ListView, CreateView
-from django.views.generic.edit import UpdateView #, ModelFormMixin
+from django.views.generic.edit import UpdateView, ModelFormMixin
 
 from braces.views import LoginRequiredMixin
 # from crispy_forms.helper import FormHelper
@@ -97,34 +97,48 @@ class HistoryListView(ListView):
 		context['contact'] = get_object_or_404(Contact, pk=self.kwargs.get("pk", None)).full_name
 		return context
 
+
+class HistoryListViewTEST(ContactUpdateView):
+	model = Contact
+	fields = ['next_call']
+
+	def get_queryset(self):
+		return History.objects.filter(contact=self.kwargs.get("pk", None)).order_by('-contacted_at')
+
+	def get_context_data(self, **kwargs):
+		context = super(HistoryListViewTEST, self).get_context_data(**kwargs)
+		# add the contact
+		context['contact'] = get_object_or_404(Contact, pk=self.kwargs.get("pk", None)).full_name
+		return context
+
+	def get_initial(self):
+		contact = get_object_or_404(Contact, pk=self.kwargs.get("pk", None))
+		self = HistoryCreateForm(initial={'next_call': next_call })
+		return self.initial.copy()
+
+
+
 class HistoryCreateView(CreateView):
 	model = History
 	fields = '__all__'
+	form_class = HistoryCreateForm
 	action = "created"
 	template_name_suffix = '_create_form'
+
+	def get_initial(self):
+		contact = get_object_or_404(Contact, pk=self.kwargs.get("pk", None))
+		self = HistoryCreateForm(initial={'contact': contact })
+		return self.initial.copy()
 
 	def get_context_data(self, **kwargs):
 		context = super(HistoryCreateView, self).get_context_data(**kwargs)
 		# add the contact
 		context['contact'] = get_object_or_404(Contact, pk=self.kwargs.get("pk", None))
-		# add the history
-		context['past'] = History.objects.filter(pk=self.kwargs.get("pk", None)).order_by('-contacted_at')
 		return context
 
 	def form_valid(self, form):
 		form.instance.user = self.request.user
-		# form.instance.contact = self.contact
 		return super(HistoryCreateView, self).form_valid(form)
-
-	# def post(self, request, *args, **kwargs):
-	# 	form = self.form_class(request.POST)
-	# 	if form.is_valid():
-	# 		# form.contact = get_object_or_404(Contact, pk=self.kwargs.get("pk", None))
-	# 		form.save()
-	# 		return super(HistoryCreateView, self).form_valid(form)
-	# 		# return HttpResponseRedirect('tocall/contact_list.html')
-
-	# 	return render(request, self.template_name, {'form': form})
 
 class HistoryUpdateView(LoginRequiredMixin, HistoryActionMixin, UpdateView):
 	model = History
@@ -143,7 +157,6 @@ def report(request):
 	report = "Here will be some sort of reporting analytics."
 	context = {'report': report}
 	return render(request, 'tocall/report.html', context)
-
 
 
 def index(request):
