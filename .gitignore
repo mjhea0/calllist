@@ -8,6 +8,7 @@ include
 *.sublime-project
 *.sublime-workspace
 *.sqlite3
+*.pyc
 calllist.md
 
 

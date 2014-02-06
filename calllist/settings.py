@@ -1,12 +1,9 @@
-"""
-Django settings for calllist project.
 
-For more information on this file, see
-https://docs.djangoproject.com/en/1.6/topics/settings/
+# Set for django.contrib.sites and django-registration
+SITE_ID = 1
 
-For the full list of settings and their values, see
-https://docs.djangoproject.com/en/1.6/ref/settings/
-"""
+# For Registration; One week activation window
+ACCOUNT_ACTIVATION_DAYS = 7
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
@@ -28,6 +25,18 @@ TEMPLATE_DEBUG = True
 
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 
+# I added this because I could not find it and thought it might be missing after messages had problems
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.contrib.auth.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.i18n",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.core.context_processors.tz",
+    "django.contrib.messages.context_processors.messages",
+)
+
+
 ALLOWED_HOSTS = []
 
 
@@ -42,6 +51,8 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'tocall',
     'crispy_forms',
+    'django.contrib.sites',
+    'registration',
 )
 
 MIDDLEWARE_CLASSES = (
