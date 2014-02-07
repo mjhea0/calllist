@@ -7,13 +7,6 @@ from django.shortcuts import get_object_or_404
 
 from .models import History, Contact
 
-class CalendarWidget(forms.TextInput):
-    class Media:
-        css = {
-            'all': ('jqueri.ui.datepicker.css',)
-        }
-        js = ('jquery-ui-1.10.4.custom.min.js', 'jquery-1.10.2.js')
-        
 class UserRegisterForm(UserCreationForm):
 
     class Meta:
@@ -30,9 +23,12 @@ class HistoryCreateForm(ModelForm):
 		}
 
 class ContactNextCallForm(ModelForm):
-
     class Meta:
-        model = Contact
-        fields = ['next_call']
-        widgets = {'next_call': DateInput(attrs={'class': 'datepicker','name': 'date', 'id': 'date'})}
+		model = Contact
+		fields = ['next_call']
 
+    def __init__(self, *args, **kwargs):
+        super(ContactNextCallForm, self).__init__(*args, **kwargs)
+        self.fields['next_call'].widget = widgets.AdminDateWidget()
+        # self.fields['mytime'].widget = widgets.AdminTimeWidget()
+        # self.fields['mydatetime'].widget = widgets.AdminSplitDateTime()

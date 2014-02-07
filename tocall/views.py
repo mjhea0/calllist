@@ -116,6 +116,27 @@ class HistoryListView(ListView):
 		context['contact'] = get_object_or_404(Contact, pk=self.kwargs.get("pk", None)).full_name
 		return context
 
+
+class HistoryListViewTEST(ContactUpdateView):
+	model = Contact
+	fields = ['next_call']
+
+	def get_queryset(self):
+		return History.objects.filter(contact=self.kwargs.get("pk", None)).order_by('-contacted_at')
+
+	def get_context_data(self, **kwargs):
+		context = super(HistoryListViewTEST, self).get_context_data(**kwargs)
+		# add the contact
+		context['contact'] = get_object_or_404(Contact, pk=self.kwargs.get("pk", None)).full_name
+		return context
+
+	def get_initial(self):
+		contact = get_object_or_404(Contact, pk=self.kwargs.get("pk", None))
+		self = HistoryCreateForm(initial={'next_call': next_call })
+		return self.initial.copy()
+
+
+
 class HistoryCreateView(CreateView):
 	model = History
 	fields = '__all__'
@@ -125,7 +146,6 @@ class HistoryCreateView(CreateView):
 
 	def get_initial(self):
 		contact = get_object_or_404(Contact, pk=self.kwargs.get("pk", None))
-		# getting this right took days
 		self = HistoryCreateForm(initial={'contact': contact })
 		return self.initial.copy()
 
