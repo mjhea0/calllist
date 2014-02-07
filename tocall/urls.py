@@ -22,6 +22,11 @@ urlpatterns = patterns('',
 		name='contact_update'
 		),
 	url(
+    	regex=r'^contact/update/date/(?P<pk>\d+)/',
+    	view=views.ContactUpdateDateView.as_view(),
+    	name='contact_update_date'
+    	),
+	url(
 		regex=r'^contact/(?P<pk>\d+)/', 
 		view=views.ContactDetailView.as_view(), 
 		name='contact_detail'
@@ -30,11 +35,6 @@ urlpatterns = patterns('',
     	regex=r'^history/list/(?P<pk>\d+)/',
     	view=views.HistoryListView.as_view(),
     	name='history_list'
-    	),
-	 url(
-    	regex=r'^history/list/TEST/(?P<pk>\d+)/',
-    	view=views.HistoryListViewTEST.as_view(),
-    	name='history_list_test'
     	),
 	url(
 		regex=r'^history/(?P<pk>\d+)/', 
