@@ -1,3 +1,4 @@
+from django.core.exceptions import ImproperlyConfigured
 from django.core.urlresolvers import reverse
 from django.core.context_processors import csrf
 from django.shortcuts import render, redirect, get_object_or_404, render_to_response
@@ -5,7 +6,7 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.views.generic import DetailView, ListView, CreateView
-from django.views.generic.edit import UpdateView, ModelFormMixin
+from django.views.generic.edit import UpdateView, ModelFormMixin, FormMixin
 
 from braces.views import LoginRequiredMixin
 # from crispy_forms.helper import FormHelper
@@ -30,7 +31,7 @@ class ContactListView(LoginRequiredMixin, ListView):
 	model = Contact
 
 	def get_queryset(self):
-		# if the list is done I want a nice big 'Congrtulations! You're done' sign
+		# if the list is done put a nice big 'Congrtulations! You're done' sign. Music too.
 		return Contact.objects.filter(
 			user=self.request.user).filter(
 			next_call__lte=datetime.date.today()).order_by('next_call')
@@ -48,9 +49,7 @@ class ContactDetailView(DetailView):
 
 	def get_context_data(self, **kwargs):
 		context = super(ContactDetailView, self).get_context_data(**kwargs)
-		# add the history
 		context['history'] = History.objects.filter(contact=self.kwargs.get("pk", None)).order_by('-contacted_at')
-		# get_object_or_404(Contact, pk=self.kwargs.get("pk", None)).full_name
 		return context
 
 class ContactCreateView(CreateView):
@@ -107,35 +106,12 @@ class HistoryListView(ListView):
 	model = History
 
 	def get_queryset(self):
-		# self.contact = get_object_or_404(Contact, pk=self.kwargs.get("pk", None))
 		return History.objects.filter(contact=self.kwargs.get("pk", None)).order_by('-contacted_at')
 
 	def get_context_data(self, **kwargs):
 		context = super(HistoryListView, self).get_context_data(**kwargs)
-		# add the contact
 		context['contact'] = get_object_or_404(Contact, pk=self.kwargs.get("pk", None)).full_name
 		return context
-
-
-class HistoryListViewTEST(ContactUpdateView):
-	model = Contact
-	fields = ['next_call']
-
-	def get_queryset(self):
-		return History.objects.filter(contact=self.kwargs.get("pk", None)).order_by('-contacted_at')
-
-	def get_context_data(self, **kwargs):
-		context = super(HistoryListViewTEST, self).get_context_data(**kwargs)
-		# add the contact
-		context['contact'] = get_object_or_404(Contact, pk=self.kwargs.get("pk", None)).full_name
-		return context
-
-	def get_initial(self):
-		contact = get_object_or_404(Contact, pk=self.kwargs.get("pk", None))
-		self = HistoryCreateForm(initial={'next_call': next_call })
-		return self.initial.copy()
-
-
 
 class HistoryCreateView(CreateView):
 	model = History
@@ -162,7 +138,6 @@ class HistoryUpdateView(LoginRequiredMixin, HistoryActionMixin, UpdateView):
 	model = History
 	action = "updated"
 	# template = "history_form.html"
-	# self.contact = get_object_or_404(Contact, pk=self.kwargs.get("pk", None))
 
 	def form_valid(self, form):
 		return super(HistoryUpdateView, self).form_valid(form)

@@ -45,7 +45,8 @@ class History(models.Model):
     contacted_at = models.DateTimeField(auto_now_add=True)
 
     def get_absolute_url(self):
-        return reverse("tocall:history_list", kwargs={"pk": self.contact.pk})
+        # return reverse("tocall:history_list", kwargs={"pk": self.contact.pk})
+        return reverse("tocall:contact_update_date", kwargs={"pk": self.contact.pk})
 
     def __unicode__(self):
         return self.write_up

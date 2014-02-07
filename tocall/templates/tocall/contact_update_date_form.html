@@ -20,13 +20,8 @@
       </form>
     </table>
 
-
 <hr />
       
-   		Contact id:  {{ contact.id }} <hr />
-      <div id="datepicker">
-   	<input  id="datepicker">
-    </div>
 {% else %}
     <p>No contact data this time. </p>
 {% endif %}
@@ -62,12 +57,6 @@
 <hr />
 contact_update_date_form.html
 {% include "iconkey.html" %}
-
-<script>
-  $(function () {
-    $( '#datepicker' ).datepicker();
-  });
-</script>
 
 {% endblock %}
 
