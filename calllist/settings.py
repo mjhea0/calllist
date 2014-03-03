@@ -1,4 +1,3 @@
-
 # Set for django.contrib.sites and django-registration
 SITE_ID = 1
 
@@ -9,6 +8,7 @@ CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import dj_database_url
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -85,6 +85,9 @@ DATABASES = {
         'NAME': 'mydatabase',
     }
 }
+
+DATABASES['default'] = dj_database_url.config(default=os.environ.get(
+    "DATABASE_URL", "sqlite:///" + os.path.join(BASE_DIR, "mydatabase.db")))
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.6/topics/i18n/
