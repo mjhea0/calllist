@@ -110,7 +110,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = 'staticfiles'
 
 STATICFILES_DIRS = (
-    os.path.join9BASE_DIR, 'static',
+    os.path.join(BASE_DIR, 'static'),
 )
 
 # For adding local_settings.py
