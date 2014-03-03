@@ -71,7 +71,7 @@ WSGI_APPLICATION = 'calllist.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'django_deploy',
+        'NAME': 'django_calllist',
         'USER': '',
         'PASSWORD': '',
         'HOST': 'localhost',
