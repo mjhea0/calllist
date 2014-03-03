@@ -11,6 +11,11 @@ include
 *.pyc
 calllist.md
 
+# my data dump
+data.json
+
+#local settings
+local_settings.py
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
