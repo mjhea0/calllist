@@ -64,9 +64,9 @@ ROOT_URLCONF = 'calllist.urls'
 
 WSGI_APPLICATION = 'calllist.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.6/ref/settings/#databases
+# Name: 'django_deploy' for last local data in postgres
 
 # DATABASES = {
 #     'default': {
@@ -86,6 +86,7 @@ DATABASES = {
     }
 }
 
+# Parse database configuration from $DATABASE_URL
 DATABASES['default'] = dj_database_url.config(default=os.environ.get(
     "DATABASE_URL", "sqlite:///" + os.path.join(BASE_DIR, "mydatabase.db")))
 
@@ -102,20 +103,19 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = 'staticfiles'
+
+STATICFILES_DIRS = (
+    os.path.join9BASE_DIR, 'static',
+)
 
 # For adding local_settings.py
 # Allow all host hosts/domain names for this site
 ALLOWED_HOSTS = ['*']
-
-# Parse database configuration from $DATABASE_URL
-import dj_database_url
-
-# DATABASES['default'] = dj_database_url.config()
 
 # Honor the 'X-Forwarded-Proto' header for request.is_secure()
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -125,5 +125,3 @@ try:
     from local_settings import *
 except Exception as e:
     pass
-
-
