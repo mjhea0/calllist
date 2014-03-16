@@ -47,8 +47,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'tocall',
     'crispy_forms',
-    'django.contrib.sites',
-    'registration',
+    'django.contrib.sites'
 )
 
 MIDDLEWARE_CLASSES = (
