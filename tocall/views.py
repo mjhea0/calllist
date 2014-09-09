@@ -71,6 +71,10 @@ class ContactUpdateView(ContactActionMixin, UpdateView):
 		form.instance.user = self.request.user
 		return super(ContactUpdateView, self).form_valid(form)
 
+	def form_invalid(self, form):
+		return super(ContactUpdateView, self).form_invalid(form)
+
+
 class ContactUpdateDateView(ContactUpdateView):
 	model = Contact
 	fields = ['next_call']
@@ -196,8 +200,8 @@ def user_register(request):
                 return redirect('/tocall/contact/create/')
         else:
             form = UserRegisterForm()
-        context = {}
-        context.update(csrf(request))
+        # context = {}
+        # context.update(csrf(request))
         context['form'] = form
         #Pass the context to a template
         return render_to_response('index.html', context)
