@@ -183,7 +183,7 @@ def user_login(request):
 				c.update({'form':UserRegisterForm()})
 				return render_to_response('index.html', c)
 	# return HttpResponseRedirect("/")
-	return redirect('/tocall/contact/list/')
+	return redirect('/tocall/contact/list/',test ="hi")
 
 # User Logout View
 def user_logout(request):
@@ -192,7 +192,7 @@ def user_logout(request):
 
 # User Register View
 def user_register(request):
-    if request.user.is_anonymous():
+    if request.user.is_anonymous() and form.is_valid:
         if request.method == 'POST':
             form = UserRegisterForm(request.POST)
             if form.is_valid:
