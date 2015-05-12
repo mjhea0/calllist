@@ -1,11 +1,56 @@
-# CallList
+# calllist
+a networking and contact management web app
 
-Just a basic networking and contact management app.
+# call list
 
-## Instructions
+instructions for re-creating
 
-1. Clone
-1. Activate a virtualenv
-1. Install requirements - `pip install -r requirements.txt`
-1. Migrate - `python manage.py migrate`
-1. Run - `python manage.py runserver`
+### install
+
+```sh
+$ mkvirtualenv callist   
+$ workon calllist  
+$ pip install django
+$ pip install ipython
+$ django-admin.py startprject calllist
+```
+    
+### test the install  
+
+```sh 
+$ python manage.py runserver
+```
+open browser to [http://localhost:8000](http://localhost:8000)
+
+### add .gitgnore
+
+### requirements.txt file
+
+```sh
+pip freeze > requirements.txt
+```
+
+### add to git
+
+```sh
+$ git init
+$ git add .
+$ git commit -m "initial commit"
+```
+
+### start the app
+
+1. run
+```sh 
+$ python manage.py startapp tocall
+```
+
+2. add app to INSTALLED APPS in settings.py file 
+3. add the data model to models.py 
+4. check SQL then sync 
+ 
+ ```sh
+$ python manage.py sql tocall
+$ python manage.py validate
+$ python manage.py syncdb
+```

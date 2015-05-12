@@ -2,13 +2,14 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 
+
 class Contact(models.Model):
     user = models.ForeignKey(User)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     company = models.CharField(max_length=50, blank=True)
     role = models.CharField(max_length=50, blank=True)
-    office = models.CharField(max_length=50, blank=True) 
+    office = models.CharField(max_length=50, blank=True)
     mobile = models.CharField(max_length=50, blank=True)
     email = models.EmailField(max_length=75, blank=True)
     url = models.URLField(max_length=200, blank=True)
@@ -27,7 +28,8 @@ class Contact(models.Model):
         return reverse("tocall:contact_detail", kwargs={"pk": self.pk})
 
     def __unicode__(self):
-        return self.last_name 
+        return self.last_name
+
 
 class History(models.Model):
     contact = models.ForeignKey('Contact')
@@ -46,7 +48,8 @@ class History(models.Model):
 
     def get_absolute_url(self):
         # return reverse("tocall:history_list", kwargs={"pk": self.contact.pk})
-        return reverse("tocall:contact_update_date", kwargs={"pk": self.contact.pk})
+        return reverse(
+            "tocall:contact_update_date", kwargs={"pk": self.contact.pk})
 
     def __unicode__(self):
         return self.write_up

@@ -1,3 +1,6 @@
+import os
+import dj_database_url
+
 # Set for django.contrib.sites and django-registration
 SITE_ID = 1
 
@@ -7,8 +10,6 @@ ACCOUNT_ACTIVATION_DAYS = 7
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-import os
-import dj_database_url
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -25,7 +26,8 @@ TEMPLATE_DEBUG = True
 
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 
-# I added this because I could not find it and thought it might be missing after messages had problems
+# I added this because I could not find it and thought it
+# might be missing after messages had problems
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.auth.context_processors.auth",
     "django.core.context_processors.debug",
@@ -120,7 +122,7 @@ ALLOWED_HOSTS = ['*']
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # try to load local_settings.py if it exists
-try: 
+try:
     from local_settings import *
 except Exception as e:
     pass

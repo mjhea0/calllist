@@ -31,7 +31,6 @@
           <ul class="nav navbar-nav">
             <li><a href="">Learn more</a></li>
             <li><a href="{% url 'index' %}">Log in</a></li>
-            <li><a href="{% url 'tocall:report' %}">Report</a></li>
 
           </ul>
         </div><!--/.nav-collapse -->
@@ -40,7 +39,7 @@
     <br/><br/><br/>
 
     <div class="container">
-    
+
       {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
       {% if messages %}
@@ -49,7 +48,7 @@
         <li id="message_{{ forloop.counter }}"
           {% if message.tags %} class="{{ message.tags }}"
             {% endif %}>
-          {{ message }}  
+          {{ message }}
         </li>
         {% endfor %}
       </ul>
