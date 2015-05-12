@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block content %}
+
+{% if history %}
+   	<h1>{{ history.contact.full_name }}</h1>
+   	<dl class="dl-horizontal">
+   		<dt>contact:</dt><dd> {{ history.contact.full_name }}</dd>
+   		<dt>write up:</dt><dd> {{ history.write_up }}</dd>
+   		<dt>contacted at:</dt><dd> {{ history.contacted_at }}</dd>
+   		<dt>email out:</dt><dd><i class="fa fa-envelope-o"></i> {{ history.email_out }}  </dd>
+   		<dt>email in:</dt><dd><i class="fa fa-envelope"></i> {{ history.email_in }}</dd>
+   		<dt>email Linkedin:</dt><dd><i class="fa fa-linkedin-square"></i> {{ history.email_linkedin }} </dd>
+   		<dt>call out:</dt><dd><i class="fa fa-phone"></i> {{ history.call_out }}  </dd>
+   		<dt>call in:</dt><dd><i class="fa fa-phone-square"></i> {{ history.call_in }}  </dd>
+   		<dt>voice mail:</dt><dd><i class="fa fa-volume-up"></i> {{ history.voice_mail }}  </dd>
+   		<dt>message:</dt><dd><i class="fa fa-file-text-o"></i>  {{ history.message }}  </dd>
+   		<dt>no message:</dt><dd><i class="fa fa-file-o"></i>  {{ history.no_message }}  </dd>
+   		<dt>no answer:</dt><dd><i class="fa fa-warning"></i>  {{ history.no_answer }}  </dd>
+   		<dt>meeting:</dt><dd><i class="fa fa-users"></i>  {{ history.meeting }} </dd>
+   		<dt>id:</dt><dd> {{ history.id }}</dd>
+   	</dl>
+{% else %}
+    <p>Egad. Nothing here. history is empty.</p>
+{% endif %}
+	
+{% include "iconkey.html" %}
+
+{% endblock %}
